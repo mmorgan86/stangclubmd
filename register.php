@@ -13,30 +13,30 @@ $error_array = []; // holds error messages
 
 if (isset($_POST['register_button'])) {
     // first name
-    $fname = mysqli_real_escape_string($conn, $fname); // remove html tags
+    $fname = mysqli_real_escape_string($conn, $_POST['reg_fname']); // remove html tags
     $fname = str_replace(' ', '', $fname); // remove spaces
     $fname = ucfirst(strtolower($fname)); // uppercase first letter
 
     // last name
-    $lname = mysqli_real_escape_string($conn, $lname); // remove html tags
+    $lname = mysqli_real_escape_string($conn, $_POST['reg_lname']); // remove html tags
     $lname = str_replace(' ', '', $lname); // remove spaces
     $lname = ucfirst(strtolower($lname)); // uppercase first letter
 
     // email
-    $em = mysqli_real_escape_string($conn, $em); // remove html tags
+    $em = mysqli_real_escape_string($conn, $_POST['reg_email']); // remove html tags
     $em = str_replace(' ', '', $em); // remove spaces
     $em = ucfirst(strtolower($em)); // uppercase first letter
 
     // email2
-    $em2 = mysqli_real_escape_string($conn, $em2); // remove html tags
+    $em2 = mysqli_real_escape_string($conn, $_POST['reg_email2']); // remove html tags
     $em2 = str_replace(' ', '', $em2); // remove spaces
     $em2 = ucfirst(strtolower($em2)); // uppercase first letter
 
     // password
-    $password = mysqli_real_escape_string($conn, $password); // remove html tags
+    $password = mysqli_real_escape_string($conn, $_POST['reg_password']); // remove html tags
 
     // password2
-    $password2 = mysqli_real_escape_string($conn, $password2); // remove html tags
+    $password2 = mysqli_real_escape_string($conn, $_POST['reg_password2']); // remove html tags
 
     // date --- get current date
     $date = date("Y-m-d");
@@ -48,12 +48,36 @@ if (isset($_POST['register_button'])) {
             $em = filter_var($em, FILTER_VALIDATE_EMAIL);
 
             // check if email already exists
-            
+            $e_check = mysqli_query($conn, "SELECT email FROM users WHERE email = '$em'");
+
+            // count the number of rows returned
+            $num_rows = mysqli_num_rows($e_check);
+
+            if ($num_rows > 0) {
+                echo "Email already in use";
+            }
         } else {
             echo "Invalid format";
         }
     } else {
         echo "Emails don't match";
+    }
+
+    if (strlen($fname) > 25 || strlen($fname) < 2) {
+        echo "Your first name must be between 2 and 25 characters";
+    }
+    if (strlen($lname) > 25 || strlen($lname) < 2) {
+        echo "Your last name must be between 2 and 25 characters";
+    }
+    if ($password != $password2) {
+        echo "Your passwords do not match!";
+    } else {
+        if (preg_match('/[^A-Za-z0-9]/', $password)) {
+            echo "Your password can only contain english characters or numbers";
+        }
+    }
+    if (strlen($password) > 30 || strlen($password) < 5) {
+        echo "Your password must be between 5 and 30 characters";
     }
 }
 ?>
