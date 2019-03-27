@@ -1,5 +1,4 @@
 <?php
-require_once "db.php";
 
 ?>
 
@@ -14,6 +13,6 @@ require_once "db.php";
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-  hello everyone
+  Hello Everyone
 </body>
 </html>

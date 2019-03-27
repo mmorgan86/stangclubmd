@@ -1,0 +1,40 @@
+html, body {
+  height: 100%;
+  min-height: 100%; /* for firefox */
+}
+
+/* background image */
+body .wrapper {
+  margin: 0;
+  padding: 0;
+  background-image: url("../images/backgrounds/gt500-1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+  min-width: 950px;
+}
+
+form {
+  text-align: center;
+}
+
+/* login forum background box */
+.login_box {
+  position: relative;
+  margin: 0;
+  top: 0%;
+  width: 30%;
+  background-color: #fff;
+  border: 1px solid lightsteelblue;
+  border-radius: 6px;
+  padding: 5px;
+  opacity: 0.88;
+}
+
+.login_header {
+  width: 100%;
+  text-align: center;
+  
+}
+
