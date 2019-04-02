@@ -2,15 +2,22 @@
 
 if (isset($_POST['login_button'])) {
 
-    // sanitize email
-    $email = filter_var($_POST['log_email'], FILTER_SANITIZE_EMAIL);
-    $email = mysqli_real_escape_string($conn, $email);
-    $_SESSION['log_email'] = $email; // store email into session variable
+    // // sanitize email
+    // $email = filter_var($_POST['log_email'], FILTER_SANITIZE_EMAIL);
+    // $email = mysqli_real_escape_string($conn, $email);
+    // $_SESSION['log_email'] = $email; // store email into session variable
 
+    // username
+    $username = $_POST['log_username'];
+    $username = mysqli_real_escape_string($conn, $username);
+
+    // password
     $password = $_POST['log_password']; // GET PASSWORD
     $password = mysqli_real_escape_string($conn, $password);
+    $_SESSION['username'] = $username;
 
-    $query = "SELECT * FROM users WHERE email = '$email'";
+    // log user in
+    $query = "SELECT * FROM users WHERE username = '$username'";
     $check_database_query = mysqli_query($conn, $query);
     $check_login_query = mysqli_num_rows($check_database_query);
     if ($check_login_query == 1) {

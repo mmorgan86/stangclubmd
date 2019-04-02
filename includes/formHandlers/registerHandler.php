@@ -4,12 +4,20 @@ $fname = ""; // First name
 $lname = ""; // Last name
 $em = ""; // email
 $em2 = ""; // email 2
+$username = "";
 $password = ""; // password
 $password2 = ""; // password2
 $date = ""; // sign up date
 $error_array = []; // holds error messages
 
 if (isset($_POST['register_button'])) {
+
+    // @todo add a vehicle filter to not list vehicle if mustang not included somewhere in vehicle title
+    // vehicle
+    $vehicle = mysqli_real_escape_string($conn, $_POST['vehicle']);
+    $vehicle = ucwords(str_replace(' ', '', $vehicle));
+    $_SESSION['vehicle'] = $vehicle;
+
     // first name
     $fname = mysqli_real_escape_string($conn, $_POST['reg_fname']); // remove html tags
     $fname = str_replace(' ', '', $fname); // remove spaces
@@ -33,6 +41,18 @@ if (isset($_POST['register_button'])) {
     $em2 = str_replace(' ', '', $em2); // remove spaces
     $em2 = ucfirst(strtolower($em2)); // uppercase first letter
     $_SESSION['reg_email2'] = $em2; // stores email2 into session variable
+
+    // username 
+    $username = mysqli_real_escape_string($conn, $_POST['reg_username']);
+    $username = str_replace(' ', '', $username);
+    $username = strtolower($username);
+
+        // check if username is taken
+        $user_query = mysqli_query($conn, "SELECT username FROM users WHERE username = '$username'");
+        if(mysqli_num_rows($user_query) > 0) {
+            array_push($error_array, "Username is already in use");
+        }
+        // enter username in db
 
     // password
     $password = mysqli_real_escape_string($conn, $_POST['reg_password']); // remove html tags
@@ -87,26 +107,27 @@ if (isset($_POST['register_button'])) {
 
         // @todo change this so user can create their own username
         // Generate username by concatenating first name and last name
-        $username = strtolower($fname . "_" . $lname);
-        $query = "SELECT username FROM users WHERE username = '$username'";
-        $check_username_query = mysqli_query($conn, $query);
-        $i = 0;
-        // if username exists add number to username
-        while (mysqli_num_rows($check_username_query > 0)) {
-            $i++; // add 1 to i
-            $username = $username . "_" . $i;
-            $check_username_query = mysqli_query($conn, $query);
-        }
+        // $username = strtolower($fname . "_" . $lname);
+        // $query = "SELECT username FROM users WHERE username = '$username'";
+        // $check_username_query = mysqli_query($conn, $query);
+        // $i = 0;
+        // // if username exists add number to username
+        // while (mysqli_num_rows($check_username_query > 0)) {
+        //     $i++; // add 1 to i
+        //     $username = $username . "_" . $i;
+        //     $check_username_query = mysqli_query($conn, $query);
+        // }
 
         // Default profile pic
         $rand = rand(1, 2); // random number between 1 and 2
         if ($rand == 1) {
-            $profile_pic = "/assets/images/profile_pics/defaults/noob1.jpg";
+            $profile_pic = "assets/images/profile_pics/defaults/noob1.jpg";
         } else {
-            $profile_pic = "/assets/images/profile_pics/defaults/ghost1.jpg";
+            $profile_pic = "assets/images/profile_pics/defaults/noob2.png";
         }
 
-        $stmt = "INSERT INTO users VALUES (null, '$fname', '$lname', '$username', '$em', '$password', '$date', '$profile_pic', '0', '0', 'no', ',')";
+        // enter new user into db
+        $stmt = "INSERT INTO users VALUES (null, $vehicle, '$fname', '$lname', '$username', '$em', '$password', '$date', '$profile_pic', '0', '0', 'no', ',')";
         $query = mysqli_query($conn, $stmt);
 
         array_push($error_array, "<span class='text-success'>You're all set! Go ahead and login</span><br>");
