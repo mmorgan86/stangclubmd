@@ -10,12 +10,12 @@ if (isset($_POST['login_button'])) {
     // username
     $username = $_POST['log_username'];
     $username = mysqli_real_escape_string($conn, $username);
+    $_SESSION['username'] = $username;
 
     // password
     $password = $_POST['log_password']; // GET PASSWORD
     $password = mysqli_real_escape_string($conn, $password);
-    $_SESSION['username'] = $username;
-
+    
     // log user in
     $query = "SELECT * FROM users WHERE username = '$username'";
     $check_database_query = mysqli_query($conn, $query);

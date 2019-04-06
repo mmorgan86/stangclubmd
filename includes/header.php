@@ -52,6 +52,8 @@ if (isset($_SESSION['username'])) {
       <a href="#"><i class="fas fa-bell-o fa-lg"></i></a>
       <a href="#"><i class="fas fa-users fa-lg"></i></a>
       <a href="#"><i class="fas fa-cog fa-lg"></i></a>
+      <a href="/stangclubmd/register.php"><i class="fas fa-sign-out-alt fa-lg"></i></a>
+
     </nav>
   </div>
 

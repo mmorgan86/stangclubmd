@@ -99,7 +99,7 @@ nav a:hover {
 }
 
 .user_details {
-  width: 290px;
+  width: 30%;
   float: left;
   margin-bottom: 20px;
   border-radius: 5px;
@@ -117,6 +117,7 @@ nav a:hover {
 }
 
 .user_details img {
+  width: 125px;
   height: 125px;
   border-radius: 5px;
   margin-right: 5px;
@@ -186,4 +187,22 @@ textarea:focus {
 .post_form input[type="submit"]:active {
   font-size: 80%;
   background-color: #6d1717;
+}
+
+.status_post {
+  width: 96%;
+  font-size: 15px;
+  padding: 0 5px;
+  min-height: 75px;
+}
+
+.post_profile_pic {
+  float: left;
+  margin-right: 8px;
+}
+
+.post_profile_pic img {
+  border-radius: 5px;
+  width: 4em;
+  max-height: 10em;
 }

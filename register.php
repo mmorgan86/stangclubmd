@@ -63,8 +63,8 @@ if (in_array("<span class='text-danger'>Please enter the correct email and passw
 ?>
     <!-- <input type="email" name="log_email" placeholder="Enter Email" value="
     <?php
-if (isset($_SESSION['log_email'])) {
-    echo $_SESSION['log_email'];
+if (isset($_SESSION['username'])) {
+    echo $_SESSION['username'];
 }
 ?>
     " required
@@ -81,7 +81,7 @@ if (isset($_SESSION['log_email'])) {
 <!-- register form -->
 <div id="register_div">
   <form class="text-center" action="register.php" method="POST">
-    <input type="text" name="vehicle" placeholder="Enter Your Stang" value="<?php if(isset($_POST['vehicle'])) echo $_POST['vehicle']; ?>">
+    <input type="text" name="vehicle" placeholder="Enter Your Stang" value="<?php if(isset($_SESSION['reg_vehicle'])) echo $_SESSION['reg_vehicle']; ?>">
     <input type="text" name="reg_fname" placeholder="First Name"
       value="<?php if (isset($_SESSION['reg_fname'])) {
       echo $_SESSION['reg_fname'];}?>"

@@ -1,5 +1,6 @@
 <?php
 // Declaring variables to prevent errors
+$vehicle = ""; // vehicle
 $fname = ""; // First name
 $lname = ""; // Last name
 $em = ""; // email
@@ -16,7 +17,7 @@ if (isset($_POST['register_button'])) {
     // vehicle
     $vehicle = mysqli_real_escape_string($conn, $_POST['vehicle']);
     $vehicle = ucwords(str_replace(' ', '', $vehicle));
-    $_SESSION['vehicle'] = $vehicle;
+    $_SESSION['reg_vehicle'] = $vehicle;
 
     // first name
     $fname = mysqli_real_escape_string($conn, $_POST['reg_fname']); // remove html tags
@@ -127,12 +128,16 @@ if (isset($_POST['register_button'])) {
         }
 
         // enter new user into db
-        $stmt = "INSERT INTO users VALUES (null, $vehicle, '$fname', '$lname', '$username', '$em', '$password', '$date', '$profile_pic', '0', '0', 'no', ',')";
+        $stmt = "INSERT INTO users VALUES (null, '$vehicle', '$fname', '$lname', '$username', '$em', '$password', '$date', '$profile_pic', '0', '0', 'no', ',')";
         $query = mysqli_query($conn, $stmt);
+
+        // echo '<pre>';
+        // print_r($stmt);
 
         array_push($error_array, "<span class='text-success'>You're all set! Go ahead and login</span><br>");
 
         // clear session variables
+        $_SESSION['reg_username'] = "";
         $_SESSION['reg_fname'] = "";
         $_SESSION['reg_lname'] = "";
         $_SESSION['reg_email'] = "";
