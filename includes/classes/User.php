@@ -11,7 +11,6 @@ class User {
       $query = "SELECT * FROM users WHERE username = '$user'";
       $user_details_query = mysqli_query($conn, $query);
       $this->user = mysqli_fetch_array($user_details_query);
-
   }
 
   public function getUsername() {
@@ -23,6 +22,22 @@ class User {
     $query = mysqli_query($this->conn, "SELECT num_posts FROM users WHERE username='$username'");
     $row = mysqli_fetch_array($query);
     return $row['num_posts'];
+  }
+
+  // get first and last name
+  public function getFirstAndLastName() {
+    $username = $this->user['username'];
+    $query = mysqli_query($this->conn, "SELECT first_name, last_name FROM users WHERE username='$username'");
+    $row = mysqli_fetch_array($query);
+    return $row['first_name'] . ' ' .$row['last_name'];
+  }
+
+  // get profile pic
+  public function getProfilePic() {
+    $username = $this->user['username'];
+    $query = mysqli_query($this->conn, "SELECT profile_pic FROM users WHERE username='$username'");
+    $row = mysqli_fetch_array($query);
+    return $row['profile_pic'];
   }
 
   // check is user account is closed

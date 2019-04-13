@@ -206,3 +206,34 @@ textarea:focus {
   width: 4em;
   max-height: 10em;
 }
+
+#comment_iframe {
+  max-height: 250px;
+  width: 100%;
+  font-size: 12px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.comment_section {
+  padding: 0 5px 5px 5px;
+}
+
+.comment_section img {
+  margin: 0 3px 3px 3px;
+  border-radius: 3px;
+}
+
+#comment_form textarea {
+  width: 85%;
+  min-height: 35px;
+  border-radius: 5px;
+  color: #484848;
+  font-size: 14px;
+  margin: 3px 3px 3px 5px;
+}
+
+#comment_form input[type="submit"] {
+  vertical-align: top;
+  border: none;
+  border-radius: 5px;
+}

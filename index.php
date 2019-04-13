@@ -3,6 +3,7 @@ include "includes/header.php";
 include "includes/classes/User.php";
 include "includes/classes/Post.php";
 
+// when button post button is click send message data
 if(isset($_POST['post'])) {
   $post = new Post($conn, $userLoggedIn);
   $post->submitPost($_POST['post_text'], 'none');
@@ -12,6 +13,7 @@ if(isset($_POST['post'])) {
 
 <!-- @todo change image and name when clicked on goes to username -->
 
+<!-- user details (right column) -->
 <div class="user_details column">
   <a href="<?php echo $userLoggedIn; ?>"><img src="<?php echo $user['profile_pic'] ?>" /></a>
   <div class="user_details_left_right">
@@ -25,6 +27,8 @@ if(isset($_POST['post'])) {
   </div>
 </div>
 
+
+<!-- post message form -->
 <div class="main_column column">
   <form action="index.php" method="POST" class="post_form">
     <textarea name="post_text" id="post_text" cols="30" rows="10" placeholder="Got something to say?"></textarea>
@@ -37,8 +41,9 @@ if(isset($_POST['post'])) {
 <img id="loading" src="assets/images/icons/mustang_loader.gif">
 
 <script>
+  //  dynamically load post on page scroll
    $(function(){
- 
+      
        var userLoggedIn = '<?php echo $userLoggedIn; ?>';
        var inProgress = false;
  

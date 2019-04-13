@@ -116,9 +116,9 @@ class Post {
               var el = document.getElementById('toggleComment<?php echo $id; ?>');
 
               if(el.style.display == 'block') {
-                el.style.display == 'none';
+                el.style.display = 'none';
               }else {
-                el.style.display == 'block';
+                el.style.display = 'block';
               }
             }
           </script>
@@ -197,8 +197,8 @@ class Post {
                       <br>
                     </div>
                   </div>
-                  <div class='post_comment' id='toggleComment$id' style='display:none'>
-                    <iframe src='comment_frame.php?post_id=$id' id='comment_iframe'></iframe>
+                  <div class='post_comment' id='toggleComment$id' style='display:none;'>
+                    <iframe src='comment_frame.php?post_id=$id' id='comment_iframe' frameborder='0'></iframe>
                   </div>
                   <hr>";
         }
