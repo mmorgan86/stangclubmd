@@ -113,17 +113,25 @@ class Post {
           <script>
             // toggle button to show and hide comments section for each post
             function toggle<?php echo $id; ?>() {
-              var el = document.getElementById('toggleComment<?php echo $id; ?>');
 
-              if(el.style.display == 'block') {
-                el.style.display = 'none';
-              }else {
-                el.style.display = 'block';
+              // if a tag (<a>) is clicked don't show comments
+              var target = $(event.target);
+              if(!target.is("a")) {
+                var el = document.getElementById('toggleComment<?php echo $id; ?>');
+
+                if(el.style.display == 'block') {
+                  el.style.display = 'none';
+                }else {
+                  el.style.display = 'block';
+                }
               }
             }
           </script>
 
           <?php
+
+          $comments_check = mysqli_query($this->conn, "SELECT * FROM comments WHERE post_id = '$id'");
+          $comments_check_num = mysqli_num_rows($comments_check);
           // Get timeframe
           $date_time_now = date("Y-m-d H:i:s");
           // time of post
@@ -195,8 +203,16 @@ class Post {
                     <div id='post_body'>
                       $body
                       <br>
+                      <br>
+                      <br>
+                    </div>
+
+                    <div class='newsFeedPostOptions'>
+                      Comments($comments_check_num)&nbsp;&nbsp;&nbsp;
+                      <iframe src='like.php?post_id=$id' scrolling='no'></iframe>
                     </div>
                   </div>
+                
                   <div class='post_comment' id='toggleComment$id' style='display:none;'>
                     <iframe src='comment_frame.php?post_id=$id' id='comment_iframe' frameborder='0'></iframe>
                   </div>

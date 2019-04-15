@@ -1,3 +1,19 @@
+<?php
+require_once "config/config.php";
+include "includes/classes/User.php";
+include "includes/classes/Post.php";
+
+if (isset($_SESSION['username'])) {
+    $userLoggedIn = $_SESSION['username'];
+    $user_details_query = mysqli_query($conn, "SELECT * FROM users WHERE username = '$userLoggedIn'");
+
+    $user = mysqli_fetch_array($user_details_query);
+} else {
+    header("Location: register.php");
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,25 +41,6 @@
   <link rel="stylesheet" href="assets/css/style.css"> 
 </head>
 <body> 
-
-<?php
-require_once "config/config.php";
-
-// include "includes/header.php";
-include "includes/classes/User.php";
-include "includes/classes/Post.php";
-
-if (isset($_SESSION['username'])) {
-    $userLoggedIn = $_SESSION['username'];
-    $user_details_query = mysqli_query($conn, "SELECT * FROM users WHERE username = '$userLoggedIn'");
-
-    $user = mysqli_fetch_array($user_details_query);
-} else {
-    // header("Location: register.php");
-}
-
-?>
-
 <script>
   // toggle button to show and hide comments section for each post
   function toggle() {
@@ -182,12 +179,17 @@ if($count != 0) {
       <a href="<?php echo $posted_by; ?>" target="_parent"><img src="<?php echo $user_obj->getProfilePic(); ?>" title="<?php echo $posted_by; ?>" style="float:left" height="30"; /></a>
 
       <a href="<?php echo $posted_by; ?>" target="_parent"> <b><?php echo $user_obj->getUsername(); ?> </b></a>
-      &nbsp;&nbsp;&nbsp;&nbsp; <?php echo $time_message . '<br>' .$comment_body; ?>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <span style="color: #acacac;"><?php echo $time_message . '</span><br><div>' .$comment_body .'</div>' ?>
       <hr>
+      
     </div>
 
     <?php
   }
+}
+else {
+  echo "<center><br><br> No comments to show! </center>";
 }
 
 ?>

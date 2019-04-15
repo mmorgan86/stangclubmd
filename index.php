@@ -22,7 +22,7 @@ if(isset($_POST['post'])) {
     <a href="#" id="vehicle"><?php echo $user['vehicle']; ?></a>
     <br>
     <?php echo "Posts: " . $user['num_posts'] . "<br>";
-            echo "likes: " . $user['num_likes'];
+          echo "likes: " . $user['num_likes'];
     ?>    
   </div>
 </div>
