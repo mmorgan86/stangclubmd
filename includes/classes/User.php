@@ -40,6 +40,14 @@ class User {
     return $row['profile_pic'];
   }
 
+  // get friend array
+  public function getFriendArray() {
+    $username = $this->user['username'];
+    $query = mysqli_query($this->conn, "SELECT friend_array FROM users WHERE username='$username'");
+    $row = mysqli_fetch_array($query);
+    return $row['friend_array'];
+  }
+
   // check is user account is closed
   public function isClosed() {
     $username = $this->user['username'];
@@ -65,7 +73,7 @@ class User {
   // checks if a request was sent into the friend_request table. if so it return true if not it returns false.
   public function didReceiveRequest($user_from) {
     $user_to = '';
-    $user_to == $this->user['username'];
+    $user_to = $this->user['username'];
     $check_request_query = mysqli_query($this->conn, "SELECT * FROM friend_requests WHERE user_to='$user_to' AND  user_from='$user_from'");
 
     if(mysqli_num_rows($check_request_query) > 0) {
@@ -77,7 +85,7 @@ class User {
 
   public function didSendRequest($user_to) {
     $user_from = '';
-    $user_from == $this->user['username'];
+    $user_from = $this->user['username'];
     $check_request_query = mysqli_query($this->conn, "SELECT * FROM friend_requests WHERE user_to='$user_to' AND  user_from='$user_from'");
 
     if(mysqli_num_rows($check_request_query) > 0) {

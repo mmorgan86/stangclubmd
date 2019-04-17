@@ -1,7 +1,5 @@
 <?php
 include "includes/header.php";
-include "includes/classes/User.php";
-include "includes/classes/Post.php";
 
 // when button post button is click send message data
 if(isset($_POST['post'])) {

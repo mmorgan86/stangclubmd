@@ -1,5 +1,7 @@
 <?php
 require_once "config/config.php";
+include "includes/classes/User.php";
+include "includes/classes/Post.php";
 
 if (isset($_SESSION['username'])) {
     $userLoggedIn = $_SESSION['username'];
@@ -50,7 +52,7 @@ if (isset($_SESSION['username'])) {
       <a href="index.php"><i class="fas fa-home fa-lg"></i></a>
       <a href="#"><i class="fas fa-envelope fa-lg"></i></a>
       <a href="#"><i class="fas fa-bell-o fa-lg"></i></a>
-      <a href="#"><i class="fas fa-users fa-lg"></i></a>
+      <a href="/stangclubmd/request.php"><i class="fas fa-users fa-lg"></i></a>
       <a href="#"><i class="fas fa-cog fa-lg"></i></a>
       <a href="/stangclubmd/register.php"><i class="fas fa-sign-out-alt fa-lg"></i></a>
 
