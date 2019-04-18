@@ -1,9 +1,11 @@
 <?php
 include "includes/header.php";
 
+// create a bootstrap modal for this page to display off header
+
 ?>
-<div class="main_column column" id="main_column">
-  <h4>Friend Requests</h4>
+<div class="text-center column" id="main_column">
+  <h4 style="border-bottom: 2px solid gray; margin-bottom: 20px;">Friend Requests</h4>
 
   <?php
 
@@ -27,7 +29,7 @@ include "includes/header.php";
         $add_friend_query = mysqli_query($conn, "UPDATE users SET friend_array=CONCAT(friend_array, '$user_from,') where username='$user_from'");
 
         // delete request
-        $delete_query = mysqli_query($conn, "DELETE FROM friend_request WHERE user_to='$userLoggedIn' AND user_from='$user_from'");
+        $delete_query = mysqli_query($conn, "DELETE FROM friend_requests WHERE user_to='$userLoggedIn' AND user_from='$user_from'");
 
         echo "You are now friends";
         header("Location: request.php");
@@ -35,18 +37,19 @@ include "includes/header.php";
       }
       if(isset($_POST['ignore_request' . $user_from])) {
         // delete request
-        $delete_query = mysqli_query($conn, "DELETE FROM friend_request WHERE user_to='$userLoggedIn' AND user_from='$user_from'");
+        $delete_query = mysqli_query($conn, "DELETE FROM friend_requests WHERE user_to='$userLoggedIn' AND user_from='$user_from'");
 
         echo "Request Ignored";
         header("Location: request.php");
       }
 
       ?>
-      <form action="requests.php" method="POST">
-        <input type="submit" class="btn btn-success" name="accept_request<?php $user_from; ?>" id="accept_button" value="Accept"/>
+      <form action="request.php" method="POST">
+        <input style="width: 8em;" type="submit" class="btn btn-success" name="accept_request<?php echo $user_from; ?>" id="accept_button" value="Accept"/>
 
-        <input type="submit" class="btn btn-danger" name="ignore_request<?php $user_from; ?>" id="ignore_button" value="Ignore"/>
+        <input style="width: 8em;" type="submit" class="btn btn-danger" name="ignore_request<?php echo $user_from; ?>" id="ignore_button" value="Ignore"/>
       </form>
+      <hr>
 
       <?php
     }
