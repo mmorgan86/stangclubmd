@@ -21,15 +21,23 @@ if (isset($_SESSION['username'])) {
   <title>StangClubMD</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
     <!-- jQuery -->
-<script
+  <script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
+  crossorigin="anonymous">
+  </script>
 
   <!-- bootstrap.js -->
   <script src="assets/js/bootstrap.min.js"></script>
 
+  <!-- bootbox js -->
+  <script src="assets/js/bootbox.all.min.js"></script>
+
+  <!-- main js -->
+  <script src="assets/js/main.js"></script>
+  
   <!-- bootstrap.css -->
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 
@@ -62,4 +70,6 @@ if (isset($_SESSION['username'])) {
   <div class="row">
       <div class="col-lg-12">
         <div class="wrapper">
+
+          
     

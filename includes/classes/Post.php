@@ -40,7 +40,6 @@ class Post {
       $update_query = mysqli_query($this->conn, "UPDATE users SET num_posts = '$num_posts' WHERE username = '$added_by' ");
       echo 'added by= ' .$added_by .' '.'num post= ' .$num_posts;
     }
-    header("Location: index.php");
   }
 
   public function loadPostsFriends($data, $limit) {
@@ -76,7 +75,7 @@ class Post {
         } else {
           $user_to_obj = new User($this->conn, $row['user_to']);
           $user_to_username = $user_to_obj->getUsername();
-          $user_to = " to <a href='" .row['user_to'] ."'>" .$user_to_username ."</a>";
+          $user_to = " to <a href='" .$row['user_to'] ."'>" .$user_to_username ."</a>";
         }
 
         // Check if user who posted, has their account closed
@@ -99,6 +98,15 @@ class Post {
           } else {
             $count++;
           }
+
+          // delete post button
+          if($userLoggedIn == $added_by) {
+            $delete_button = '<button class="delete_button btn-danger" id="post'.$id.'">X</button>';
+          } else {
+            $delete_button = '';
+          }
+
+          // get user details
           $user_details_query = mysqli_query($this->conn, "SELECT first_name, last_name, profile_pic, username FROM users WHERE username = '$added_by'");
           $user_row = mysqli_fetch_array($user_details_query);
 
@@ -116,7 +124,8 @@ class Post {
 
               // if a tag (<a>) is clicked don't show comments
               var target = $(event.target);
-              if(!target.is("a")) {
+              if (!target.is("a") && !target.is("button")) {
+
                 var el = document.getElementById('toggleComment<?php echo $id; ?>');
 
                 if(el.style.display == 'block') {
@@ -199,6 +208,7 @@ class Post {
                     </div>
                     <div class='post_by' style='color:#ACACAC;'>
                       <a href='$added_by'>$username </a> $user_to &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$time_message
+                      $delete_button
                     </div>
                     <div id='post_body'>
                       $body
@@ -217,6 +227,24 @@ class Post {
                     <iframe src='comment_frame.php?post_id=$id' id='comment_iframe' frameborder='0'></iframe>
                   </div>
                   <hr>";
+
+        ?>
+        <script>
+          $(document).ready(function() {
+            $('#post<?php echo $id; ?>').on('click', function () {
+              bootbox.confirm('Are you sure you want to delete this post?', function (result) {
+                $.post("includes/formHandlers/delete_post.php?post_id<?php echo $id; ?>", 
+                {result:result});
+                if(result) {
+                  setTimeout(function(){
+                    location.reload();
+                  }, 300);
+                }
+              });
+            });
+          });
+        </script>
+        <?php
         }
       } // End while loop
       if($count > $limit) {
