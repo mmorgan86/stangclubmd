@@ -385,3 +385,13 @@ textarea:focus {
 .deep_blue {
   background-color: darkblue;
 }
+
+.delete_button {
+  height: 24px;
+  width: 24px;
+  padding: 0;
+  float: right;
+  border-radius: 5px;
+  right: -15px;
+  position: relative;
+}
