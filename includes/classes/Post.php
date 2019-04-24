@@ -38,7 +38,7 @@ class Post {
       $num_posts = $this->user_obj->getNumPosts();
       $num_posts ++;
       $update_query = mysqli_query($this->conn, "UPDATE users SET num_posts = '$num_posts' WHERE username = '$added_by' ");
-      echo 'added by= ' .$added_by .' '.'num post= ' .$num_posts;
+      // echo 'added by= ' .$added_by .' '.'num post= ' .$num_posts;
     }
   }
 
