@@ -5,11 +5,13 @@ include "includes/classes/User.php";
 if (isset($_SESSION['username'])) {
     $userLoggedIn = $_SESSION['username'];
     $user_details_query = mysqli_query($conn, "SELECT * FROM users WHERE username = '$userLoggedIn'");
-
-    $user = mysqli_fetch_array($user_details_query);
+    
+    // $user = mysqli_fetch_array($user_details_query);
+    // $added_by = $user['username'];
 } else {
     header("Location: register.php");
 }
+
 
 ?>
 
@@ -18,7 +20,7 @@ if (isset($_SESSION['username'])) {
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Page Title</title>
+  <title>StangClubMD</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
       <!-- jQuery -->
   <script
@@ -63,13 +65,26 @@ if(isset($_REQUEST['post_id'])) {
 }
 
 // query to get data
-$user_query = mysqli_query($conn, "SELECT added_by, user_to FROM posts WHERE id = '$post_id'");
+$user_query = mysqli_query($conn, "SELECT p.id, c.post_id, p.added_by, p.user_to, c.posted_by, c.posted_to FROM posts p LEFT JOIN comments c ON p.id = c.post_id WHERE p.id = '$post_id'");
 
 // store data in $row array
 $row = mysqli_fetch_array($user_query);
 
 // set data to variables
 $posted_to = $row['added_by'];
+
+// get id 
+$id = $row['post_id'];
+
+// echo '<pre>';
+// print_r($row['posted_by']);
+
+// delete post button
+if($userLoggedIn == $row['posted_by']) {
+  $delete_button = '<button class="delete_button btn-danger" id="comment'.$id.'">x</button>';
+} else {
+  $delete_button = '';
+}
 
 
 // insert comment in database
@@ -174,12 +189,12 @@ if($count != 0) {
     $user_obj = new User($conn, $posted_by);
 
     ?>
-    <div class="comment_section">
+    <div class="comment_section" id="comment<?php echo $id ?>">
       <a href="<?php echo $posted_by; ?>" target="_parent"><img src="<?php echo $user_obj->getProfilePic(); ?>" title="<?php echo $posted_by; ?>" style="float:left" height="30"; /></a>
 
       <a href="<?php echo $posted_by; ?>" target="_parent"> <b><?php echo $user_obj->getUsername(); ?> </b></a>
       &nbsp;&nbsp;&nbsp;&nbsp;
-      <span style="color: #acacac;"><?php echo $time_message . '</span><br><div>' .$comment_body .'</div>' ?>
+      <span style="color: #acacac;"><?php echo $time_message . '</span>'.$delete_button.'<br><div>' .$comment_body .'</div>' ?>
       <hr>
       
     </div>

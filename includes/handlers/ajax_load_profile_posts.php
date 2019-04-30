@@ -1,10 +1,9 @@
 <?php
 // infinite scroll
 
-include_once('../../config/config.php');
-include_once("../classes/User.php");
-include_once("../classes/Post.php");
-
+require_once "../../config/config.php";
+include("../../includes/classes/User.php");
+include("../../includes/classes/Post.php");
 // Number of post to be loaded per call
 $limit = 10; 
 

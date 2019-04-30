@@ -33,10 +33,13 @@ if(isset($_POST['post'])) {
     <input type="submit" name="post" id="post_button" value="Post">
     <hr>
   </form>
+
   <div class="post_area"></div>
+  <img id="loading" src="assets/images/icons/mustang_loader.gif">
+  
 </div>
 
-<img id="loading" src="assets/images/icons/mustang_loader.gif">
+
 
 <script>
   //  dynamically load post on page scroll

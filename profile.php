@@ -74,8 +74,9 @@ if (isset($_POST['respond_request'])) {
 </div>
 
 <div class="main_column column">
-  <?php echo $username; ?>
-
+  <div class="post_area"></div>
+  <!-- <img id="loading" src="assets/images/icons/mustang_loader.gif"> -->
+  
  
 </div>
 
@@ -169,9 +170,9 @@ if (isset($_POST['respond_request'])) {
 
           var ajaxReg = $.ajax({
             url: "includes/handlers/ajax_load_profile_posts.php",
-            type: "POST"
-            data: "page=" + page = "&userLoggedIn=" + userLoggedIn + "&profileUsername=" + profileUsername,
-            cache: false,
+            type: "POST",
+            data: "page=" + page + "&userLoggedIn=" + userLoggedIn + "&profileUsername=" + profileUsername,
+            cache:false,
 
             success: function(response) {
               $('.post_area').find('.nextPage').remove();

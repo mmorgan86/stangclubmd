@@ -257,11 +257,11 @@ class Post {
     echo $str;
   }
 
-  public function loadProfilePost($data, $limit) {
+  public function loadProfilePosts($data, $limit) {
 
     $page = $data['page'];
     $userLoggedIn = $this->user_obj->getUsername();
-    $profileUser = $data['profileUser'];
+    $profileUser = $data['profileUsername'];
 
     if($page == 1) {
       $start = 0;
@@ -404,7 +404,7 @@ class Post {
                       <img src='$profile_pic' width='50'>
                     </div>
                     <div class='post_by' style='color:#ACACAC;'>
-                      <a href='$added_by'>$username </a> $user_to &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$time_message
+                      <a href='$added_by'>$username </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$time_message
                       $delete_button
                     </div>
                     <div id='post_body'>
