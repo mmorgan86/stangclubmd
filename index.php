@@ -9,6 +9,11 @@ if(isset($_POST['post'])) {
 
 ?>
 
+<!-- delete button -->
+
+
+<!-- end delete button -->
+
 <!-- @todo change image and name when clicked on goes to username -->
 
 <!-- user details (right column) -->
@@ -28,6 +33,7 @@ if(isset($_POST['post'])) {
 
 <!-- post message form -->
 <div class="main_column column">
+
   <form action="index.php" method="POST" class="post_form">
     <textarea name="post_text" id="post_text" cols="30" rows="10" placeholder="Got something to say?"></textarea>
     <input type="submit" name="post" id="post_button" value="Post">
@@ -36,7 +42,7 @@ if(isset($_POST['post'])) {
 
   <div class="post_area"></div>
   <img id="loading" src="assets/images/icons/mustang_loader.gif">
-  
+
 </div>
 
 

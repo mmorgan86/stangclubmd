@@ -26,7 +26,7 @@ include "includes/header.php";
       if(isset($_POST['accept_request' . $user_from])) {
         // add friends
         $add_friend_query = mysqli_query($conn, "UPDATE users SET friend_array=CONCAT(friend_array, '$user_from,') where username='$userLoggedIn'");
-        $add_friend_query = mysqli_query($conn, "UPDATE users SET friend_array=CONCAT(friend_array, '$user_from,') where username='$user_from'");
+        $add_friend_query = mysqli_query($conn, "UPDATE users SET friend_array=CONCAT(friend_array, '$userLoggedIn,') where username='$user_from'");
 
         // delete request
         $delete_query = mysqli_query($conn, "DELETE FROM friend_requests WHERE user_to='$userLoggedIn' AND user_from='$user_from'");

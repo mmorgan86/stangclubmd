@@ -2,6 +2,7 @@
 require_once "config/config.php";
 include "includes/classes/User.php";
 include "includes/classes/Post.php";
+include "includes/classes/Message.php";
 
 if (isset($_SESSION['username'])) {
     $userLoggedIn = $_SESSION['username'];
@@ -37,6 +38,8 @@ if (isset($_SESSION['username'])) {
 
   <!-- main js -->
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/jcrop_bits.js"></script>
+  <script src="assets/js/jquery.Jcrop.js"></script>​
   
   <!-- bootstrap.css -->
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -46,6 +49,10 @@ if (isset($_SESSION['username'])) {
 
   <!-- custom css -->
   <link rel="stylesheet" href="assets/css/style.css">
+
+  <link rel='stylesheet' href='assets/css/jquery.Jcrop.css' type='text/css' />
+  
+
 
 </head>
 <body>

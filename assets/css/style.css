@@ -201,7 +201,7 @@ textarea:focus {
 }
 
 .post_form input[type="submit"]:active {
-  font-size: 80%;
+  font-size: 75%;
   background-color: #6d1717;
 }
 
@@ -331,10 +331,10 @@ textarea:focus {
 
 .profile_left img {
   min-width: 100px;
-  width: 55%;
+  width: 80%;
   margin: 20px;
-  border: 5px solid #9e212147;
-  border-radius: 50%;
+  border: 2px solid #9e212147;
+  border-radius: 5px;
 }
 
 .profile_info {
@@ -394,4 +394,30 @@ textarea:focus {
   border-radius: 5px;
   right: -15px;
   position: relative;
+}
+
+.profile_main_column {
+  float: left;
+  z-index: -1;
+  min-width: 675px;
+  width: 70%;
+}
+
+.profile_info_bottom {
+  margin: 10px 0 0 2em;
+}
+
+.post_something_btn {
+  margin: 1em 0 0 1em;
+  width: 90%;
+  height: 30px;
+  border-radius: 5px;
+  margin: 7px 0 0 7px;
+  border: none;
+  color: #fff;
+}
+
+.post_something_btn:hover {
+  background-color: #cecece;
+  color: blue;
 }

@@ -69,13 +69,21 @@ if (isset($_POST['respond_request'])) {
   </form>
 
   <!-- POST SOMETHING BUTTON -->
-  <input type="submit" class="btn btn-primary" data-toggle="modal" data-target="#post_form" value="Post Something">
+  <input type="submit" class="post_something_btn btn btn-primary" data-toggle="modal" data-target="#post_form" value="Post Something">
+
+  <?php
+    if($userLoggedIn != $username) {
+      echo '<div class="profile_info_bottom">';
+      echo $logged_in_user_obj->getMutualFriends($username). " Mutual Friends";
+        echo '</div>';
+    }
+  ?>
 
 </div>
 
-<div class="main_column column">
+<div class="profile_main_column column">
   <div class="post_area"></div>
-  <!-- <img id="loading" src="assets/images/icons/mustang_loader.gif"> -->
+  <img id="loading" src="assets/images/icons/mustang_loader.gif">
   
  
 </div>
